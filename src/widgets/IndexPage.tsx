@@ -2,6 +2,7 @@ import {
   Box,
   Card,
   CardActionArea,
+  Link,
   Stack,
   ToggleButton,
   ToggleButtonGroup,
@@ -140,6 +141,20 @@ const IndexPage = () => {
           </Card>
         ))}
       </Stack>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ display: 'block', mt: 4, textAlign: 'center' }}
+      >
+        <Link
+          href="https://github.com/TravisBumgarner/notion-widgets"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="inherit"
+        >
+          Source on GitHub
+        </Link>
+      </Typography>
     </Box>
   );
 };
