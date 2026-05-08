@@ -112,7 +112,7 @@ const darkTheme = createTheme({
       contrastText: PALETTE.grayscale[900],
     },
     background: {
-      default: PALETTE.grayscale[900],
+      default: PALETTE.grayscale[850],
       paper: PALETTE.grayscale[800],
     },
     text: {
