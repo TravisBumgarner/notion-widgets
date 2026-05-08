@@ -1,0 +1,31 @@
+# SPA fallback + proxy /ws and /health to the local daemon.
+# NFS serves this via Apache by default.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # WebSocket upgrade -> daemon on :4848
+  <IfModule mod_proxy_wstunnel.c>
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteRule ^ws/?$ ws://localhost:4848/ws [P,L]
+  </IfModule>
+
+  # Plain HTTP /health -> daemon
+  RewriteRule ^health/?$ http://localhost:4848/health [P,L]
+
+  # SPA fallback: unmatched paths -> index.html
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Long-cache hashed Vite assets; never cache the HTML shell.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?|svg|png|jpg|jpeg|gif|webp|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>

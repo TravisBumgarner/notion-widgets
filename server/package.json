@@ -1,0 +1,23 @@
+{
+  "name": "linear-widgets-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WebSocket relay for shared widget rooms.",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "rm -rf ./build && tsc",
+    "start": "ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "start:prod": "node build/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.9.0",
+    "@types/ws": "^8.5.13",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
