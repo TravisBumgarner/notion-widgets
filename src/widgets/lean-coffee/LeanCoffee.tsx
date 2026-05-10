@@ -169,7 +169,6 @@ const ConfiguratorPage = ({
   return (
     <Box sx={{ minHeight: '100vh', p: { xs: 2, md: 4 } }}>
       <BackButton />
-      <ThemePicker />
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={4}
@@ -200,6 +199,15 @@ const ConfiguratorPage = ({
 
           <Box>
             <Typography variant="overline" color="text.secondary">
+              Theme
+            </Typography>
+            <Box sx={{ mt: 1 }}>
+              <ThemePicker />
+            </Box>
+          </Box>
+
+          <Box>
+            <Typography variant="overline" color="text.secondary">
               Presets
             </Typography>
             <Box
@@ -214,7 +222,13 @@ const ConfiguratorPage = ({
                 onChange={(e) => setNewMinutes(e.target.value)}
                 placeholder="Minutes"
                 inputProps={{ min: 0, step: 0.5, 'aria-label': 'minutes' }}
-                sx={{ width: 110 }}
+                sx={{
+                  width: 110,
+                  '& .MuiOutlinedInput-input': {
+                    py: '5.5px',
+                    fontSize: '0.8125rem',
+                  },
+                }}
               />
               <Button
                 type="submit"

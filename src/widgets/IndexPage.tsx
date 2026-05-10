@@ -22,11 +22,16 @@ const IndexPage = () => {
         py: SPACING.HUGE.PX,
       }}
     >
-      <ThemePicker />
-      <Stack sx={{ mb: 1 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mb: 1 }}
+      >
         <Typography variant="h3" component="h1">
           Notion Widgets
         </Typography>
+        <ThemePicker />
       </Stack>
       <Box sx={{ mb: 4 }}>
         <Box

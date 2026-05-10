@@ -13,17 +13,9 @@ const ThemePicker = () => {
         if (next) setPreference(next);
       }}
       aria-label="theme mode"
-      sx={{
-        position: 'fixed',
-        top: 12,
-        right: 12,
-        zIndex: 10,
-        backgroundColor: 'background.paper',
-        boxShadow: 2,
-      }}
     >
-      <ToggleButton value="light">Light</ToggleButton>
       <ToggleButton value="system">System</ToggleButton>
+      <ToggleButton value="light">Light</ToggleButton>
       <ToggleButton value="dark">Dark</ToggleButton>
     </ToggleButtonGroup>
   );
