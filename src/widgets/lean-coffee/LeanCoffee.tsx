@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import BackButton from '@/components/BackButton';
+import ThemePicker from '@/components/ThemePicker';
 import { useUrlParams } from '@/lib/useUrlParams';
 import ShareDialog from '@/widgets/lean-coffee/ShareDialog';
 import { leanCoffeeSchema } from '@/widgets/lean-coffee/schema';
@@ -168,6 +169,7 @@ const ConfiguratorPage = ({
   return (
     <Box sx={{ minHeight: '100vh', p: { xs: 2, md: 4 } }}>
       <BackButton />
+      <ThemePicker />
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={4}

@@ -4,18 +4,14 @@ import {
   CardActionArea,
   Link,
   Stack,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { type ThemeMode, useThemeMode } from '@/lib/themeMode';
+import ThemePicker from '@/components/ThemePicker';
 import { SPACING } from '@/styles/styleConsts';
 import { WIDGETS } from '@/widgets/registry';
 
 const IndexPage = () => {
-  const { preference, setPreference } = useThemeMode();
-
   return (
     <Box
       component="main"
@@ -26,28 +22,11 @@ const IndexPage = () => {
         py: SPACING.HUGE.PX,
       }}
     >
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 1 }}
-      >
+      <ThemePicker />
+      <Stack sx={{ mb: 1 }}>
         <Typography variant="h3" component="h1">
           Notion Widgets
         </Typography>
-        <ToggleButtonGroup
-          size="small"
-          exclusive
-          value={preference}
-          onChange={(_, next: ThemeMode | null) => {
-            if (next) setPreference(next);
-          }}
-          aria-label="theme mode"
-        >
-          <ToggleButton value="light">Light</ToggleButton>
-          <ToggleButton value="system">System</ToggleButton>
-          <ToggleButton value="dark">Dark</ToggleButton>
-        </ToggleButtonGroup>
       </Stack>
       <Box sx={{ mb: 4 }}>
         <Box

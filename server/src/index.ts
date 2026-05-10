@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import express from 'express';
@@ -10,7 +11,7 @@ const STATIC_DIR = path.resolve(__dirname, '..', 'dist');
 // or bandwidth via the relay. Tune if real usage hits a ceiling.
 const LIMITS = {
   MAX_MESSAGE_BYTES: 4096,
-  MAX_ROOMS: 500,
+  MAX_ROOMS: 5000,
   MAX_PEERS_PER_ROOM: 20,
   MAX_CONNECTIONS_PER_IP: 5,
   MSG_WINDOW_MS: 10_000,
@@ -106,9 +107,26 @@ const broadcast = (roomId: string, sender: WebSocket, payload: RawData) => {
   }
 };
 
+// Write to /home/logs/server.log when that directory exists (NFS),
+// always console.log too so dev sees output and NFS can also capture
+// stdout if its daemon config is wired up that way.
+const logStream = (() => {
+  try {
+    if (fs.statSync('/home/logs').isDirectory()) {
+      return fs.createWriteStream('/home/logs/server.log', { flags: 'a' });
+    }
+  } catch {
+    // /home/logs missing (local dev) — fall through to console-only
+  }
+  return null;
+})();
+
 const log = (event: string, info: Record<string, unknown> = {}) => {
+  const ts = new Date().toISOString();
   const parts = Object.entries(info).map(([k, v]) => `${k}=${v}`);
-  console.log(`[${event}]${parts.length ? ` ${parts.join(' ')}` : ''}`);
+  const line = `${ts} [${event}]${parts.length ? ` ${parts.join(' ')}` : ''}`;
+  console.log(line);
+  if (logStream) logStream.write(`${line}\n`);
 };
 
 const cleanup = (ws: WebSocket, reason: string) => {
@@ -219,5 +237,5 @@ const heartbeat = setInterval(() => {
 server.on('close', () => clearInterval(heartbeat));
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`server listening on :${PORT}`);
+  log('startup', { port: PORT, log_file: logStream ? 'yes' : 'no' });
 });
