@@ -173,7 +173,7 @@ const ConfiguratorPage = ({
         direction={{ xs: 'column', sm: 'row' }}
         spacing={4}
         sx={{
-          maxWidth: 1100,
+          maxWidth: 932,
           mx: 'auto',
           mt: { xs: 2, md: 4 },
           alignItems: 'flex-start',
@@ -186,16 +186,9 @@ const ConfiguratorPage = ({
             flexShrink: 0,
           }}
         >
-          <Box>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Lean Coffee Timer
-            </Typography>
-            <Typography color="text.secondary">
-              Configure your durations, then click Create Widget URL to mint a
-              shareable Notion embed. Anyone viewing the page will share the
-              same start, pause, and reset state.
-            </Typography>
-          </Box>
+          <Typography variant="h4" component="h1">
+            Lean Coffee
+          </Typography>
 
           <Box>
             <Typography variant="overline" color="text.secondary">
@@ -274,7 +267,7 @@ const ConfiguratorPage = ({
           </Box>
         </Stack>
 
-        <Stack spacing={1} sx={{ flex: 1, minWidth: 0, width: '100%' }}>
+        <Stack spacing={1} sx={{ width: '100%', maxWidth: 700, minWidth: 0 }}>
           <Typography variant="overline" color="text.secondary">
             Preview
           </Typography>
@@ -283,9 +276,7 @@ const ConfiguratorPage = ({
             sx={{
               p: 3,
               width: '100%',
-              maxWidth: 700,
               height: 300,
-              mx: 'auto',
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
@@ -411,7 +402,7 @@ const TimerWidget = ({
               <span>
                 To change these durations,{' '}
                 <Link
-                  href="https://notion.travisbumgarner.dev/"
+                  href="https://notion.travisbumgarner.dev/w/lean-coffee"
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{ color: 'inherit', textDecoration: 'underline' }}
