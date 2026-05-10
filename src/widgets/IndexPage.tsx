@@ -2,19 +2,15 @@ import {
   Box,
   Card,
   CardActionArea,
+  Link,
   Stack,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { type ThemeMode, useThemeMode } from '@/lib/themeMode';
 import { SPACING } from '@/styles/styleConsts';
 import { WIDGETS } from '@/widgets/registry';
 
 const IndexPage = () => {
-  const { preference, setPreference } = useThemeMode();
-
   return (
     <Box
       component="main"
@@ -27,26 +23,33 @@ const IndexPage = () => {
     >
       <Stack
         direction="row"
-        alignItems="center"
+        alignItems="baseline"
         justifyContent="space-between"
-        sx={{ mb: 1 }}
+        sx={{ mb: 4 }}
       >
-        <Typography variant="h3" component="h1">
+        <Typography variant="h3" component="h1" sx={{ fontSize: '28px' }}>
           Notion Widgets
         </Typography>
-        <ToggleButtonGroup
-          size="small"
-          exclusive
-          value={preference}
-          onChange={(_, next: ThemeMode | null) => {
-            if (next) setPreference(next);
-          }}
-          aria-label="theme mode"
-        >
-          <ToggleButton value="light">Light</ToggleButton>
-          <ToggleButton value="system">System</ToggleButton>
-          <ToggleButton value="dark">Dark</ToggleButton>
-        </ToggleButtonGroup>
+        <Stack direction="row" spacing={2} alignItems="baseline">
+          <Link
+            href="https://travisbumgarner.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="text.secondary"
+            variant="caption"
+          >
+            Author
+          </Link>
+          <Link
+            href="https://github.com/TravisBumgarner/notion-widgets"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="text.secondary"
+            variant="caption"
+          >
+            Source on GitHub
+          </Link>
+        </Stack>
       </Stack>
       <Box sx={{ mb: 4 }}>
         <Box
@@ -115,16 +118,6 @@ const IndexPage = () => {
             </Box>
           ))}
         </Box>
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{ display: 'block', mt: 3 }}
-        >
-          Shared widgets sync start/pause/reset across everyone viewing the
-          embed.
-          <br />
-          Presets are baked into the URL — to change them, create a new widget.
-        </Typography>
       </Box>
       <Stack spacing={1.5}>
         {WIDGETS.map((w) => (

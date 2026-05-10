@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import BackButton from '@/components/BackButton';
+import ThemePicker from '@/components/ThemePicker';
 import { useUrlParams } from '@/lib/useUrlParams';
 import ShareDialog from '@/widgets/lean-coffee/ShareDialog';
 import { leanCoffeeSchema } from '@/widgets/lean-coffee/schema';
@@ -172,7 +173,7 @@ const ConfiguratorPage = ({
         direction={{ xs: 'column', sm: 'row' }}
         spacing={4}
         sx={{
-          maxWidth: 1100,
+          maxWidth: 932,
           mx: 'auto',
           mt: { xs: 2, md: 4 },
           alignItems: 'flex-start',
@@ -185,15 +186,17 @@ const ConfiguratorPage = ({
             flexShrink: 0,
           }}
         >
+          <Typography variant="h4" component="h1">
+            Lean Coffee
+          </Typography>
+
           <Box>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Lean Coffee Timer
+            <Typography variant="overline" color="text.secondary">
+              Theme
             </Typography>
-            <Typography color="text.secondary">
-              Configure your durations, then click Create Widget URL to mint a
-              shareable Notion embed. Anyone viewing the page will share the
-              same start, pause, and reset state.
-            </Typography>
+            <Box sx={{ mt: 1 }}>
+              <ThemePicker />
+            </Box>
           </Box>
 
           <Box>
@@ -212,7 +215,13 @@ const ConfiguratorPage = ({
                 onChange={(e) => setNewMinutes(e.target.value)}
                 placeholder="Minutes"
                 inputProps={{ min: 0, step: 0.5, 'aria-label': 'minutes' }}
-                sx={{ width: 110 }}
+                sx={{
+                  width: 110,
+                  '& .MuiOutlinedInput-input': {
+                    py: '5.5px',
+                    fontSize: '0.8125rem',
+                  },
+                }}
               />
               <Button
                 type="submit"
@@ -258,7 +267,7 @@ const ConfiguratorPage = ({
           </Box>
         </Stack>
 
-        <Stack spacing={1} sx={{ flex: 1, minWidth: 0, width: '100%' }}>
+        <Stack spacing={1} sx={{ width: '100%', maxWidth: 700, minWidth: 0 }}>
           <Typography variant="overline" color="text.secondary">
             Preview
           </Typography>
@@ -267,9 +276,7 @@ const ConfiguratorPage = ({
             sx={{
               p: 3,
               width: '100%',
-              maxWidth: 700,
               height: 300,
-              mx: 'auto',
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
@@ -395,7 +402,7 @@ const TimerWidget = ({
               <span>
                 To change these durations,{' '}
                 <Link
-                  href="https://notion.travisbumgarner.dev/"
+                  href="https://notion.travisbumgarner.dev/w/lean-coffee"
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{ color: 'inherit', textDecoration: 'underline' }}
